@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:matching_cats/src/blocs/bloc/auth_bloc.dart';
-import 'package:matching_cats/src/blocs/bloc/test_bloc.dart';
+import 'package:matching_cats/src/blocs/auth_bloc/auth_bloc.dart';
+import 'package:matching_cats/src/pages/RegisterPage/UI/register_page.dart';
 import 'package:matching_cats/src/pages/home_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => TestBloc(),
+          create: (context) => AuthBloc(),
         ),
       ],
       child: MaterialApp(
@@ -25,7 +25,12 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const MyHomePage(title: 'Flutter'),
+        initialRoute: "/register",
+        routes: {
+          "/register": (context) => const RegisterPage(
+                title: 'Register',
+              )
+        },
       ),
     );
   }
