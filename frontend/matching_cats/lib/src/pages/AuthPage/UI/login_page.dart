@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:matching_cats/src/blocs/auth_bloc/auth_bloc.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key, required this.title}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _LoginPageState extends State<LoginPage> {
   late String _userNameInput, _passwordInput, _emailInput;
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
           }
         },
         builder: (context, state) {
-          if (state is RegisterLoadingState) {
+          if (state is LoginLoadingState) {
             return Container(
               child: Text("test"),
             );
@@ -62,18 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Register"),
-
-          //input username
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter your username',
-              ),
-            ),
-          ),
+          Text("Login"),
 
           //input email
           Padding(
@@ -106,10 +95,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   minimumSize: const Size(double.infinity, 54),
                   backgroundColor: Colors.blue[50]),
               onPressed: () {
-                BlocProvider.of<AuthBloc>(context).add(OnRegister(
-                    email: _emailInput,
-                    password: _passwordInput,
-                    username: _userNameInput));
+                BlocProvider.of<AuthBloc>(context).add(OnLogin(
+                  email: _emailInput,
+                  password: _passwordInput,
+                ));
               },
               child: const Text(
                 'Login',

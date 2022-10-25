@@ -22,6 +22,7 @@ mongoose
 app.use(express.json());
 app.use(cors());
 app.use('/users', require('./src/routes/users.routers.js'));
+app.use('/cats', require('./src/routes/cats.routers.js'));
 //app.use(error.errorHandler);
 
 app.listen(4000, () => {

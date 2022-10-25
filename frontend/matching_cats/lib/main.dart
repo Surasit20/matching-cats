@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:matching_cats/src/blocs/auth_bloc/auth_bloc.dart';
-import 'package:matching_cats/src/pages/RegisterPage/UI/register_page.dart';
+import 'package:matching_cats/src/pages/AuthPage/UI/register_page.dart';
 import 'package:matching_cats/src/pages/home_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'src/pages/AuthPage/UI/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,10 +27,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: "/register",
+        initialRoute: "/login",
         routes: {
           "/register": (context) => const RegisterPage(
                 title: 'Register',
+              ),
+          "/login": (context) => const LoginPage(
+                title: 'Login',
               )
         },
       ),
