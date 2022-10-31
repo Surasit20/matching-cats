@@ -12,7 +12,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  late String _userNameInput, _passwordInput, _emailInput;
+  String _userNameInput = "", _passwordInput = "", _emailInput = "";
   @override
   void initState() {
     super.initState();
@@ -36,9 +36,9 @@ class _RegisterPageState extends State<RegisterPage> {
             buildErrorLayout();
           } else if (state is RegisterLoadingState) {
             clearTextData();
-            Navigator.of(context).pushNamed(
-              '/dashboard',
-            );
+            // Navigator.of(context).pushNamed(
+            //   '/dashboard',
+            //);
           }
         },
         builder: (context, state) {
@@ -65,12 +65,13 @@ class _RegisterPageState extends State<RegisterPage> {
           Text("Register"),
 
           //input username
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter your username',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: TextFormField(
+              onChanged: (value) => _userNameInput = value,
+              decoration: const InputDecoration(
+                border: UnderlineInputBorder(),
+                labelText: 'Enter your email',
               ),
             ),
           ),
@@ -79,6 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: TextFormField(
+              onChanged: (value) => _emailInput = value,
               decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
                 labelText: 'Enter your email',
@@ -90,6 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: TextFormField(
+              onChanged: (value) => _passwordInput = value,
               decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
                 labelText: 'Enter your password',
@@ -106,6 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   minimumSize: const Size(double.infinity, 54),
                   backgroundColor: Colors.blue[50]),
               onPressed: () {
+                print(_emailInput);
                 BlocProvider.of<AuthBloc>(context).add(OnRegister(
                     email: _emailInput,
                     password: _passwordInput,

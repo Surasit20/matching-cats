@@ -10,29 +10,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthEvent>((event, emit) async {
       if (event is OnRegister) {
         print("Register");
-        emit(RegisterLoadingState());
+        //emit(RegisterLoadingState());
         try {
           final response = await dio
               .post('http://192.168.1.4:4000/users/register', data: {
-            'name': event.username,
+            'userName': event.username,
             'email': event.email,
             "password": event.password
           });
-          emit(UserRegisterSuccessState());
+          //emit(UserRegisterSuccessState());
           print(response);
         } catch (e) {
           print(e);
         }
       } else if (event is OnLogin) {
         print("Login");
-        emit(RegisterLoadingState());
+        //emit(LoginLoadingState());
         try {
           final response = await dio.post('http://192.168.1.4:4000/users/login',
               data: {'email': event.email, "password": event.password});
 
           print(response);
+          if (response.statusCode == 200) {
+            emit(UserLoginSuccessState());
+          }
         } catch (e) {
+          emit(LoginErrorState(message: e.toString()));
           print(e);
+          print("rfghfghrty");
         }
       }
     });

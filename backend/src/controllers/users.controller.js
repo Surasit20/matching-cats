@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 exports.register = async (req, res, next) => {
   const newUser = new User({
-    name: req.body.name,
+    userName: req.body.userName,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password),
   });
@@ -12,7 +12,7 @@ exports.register = async (req, res, next) => {
 
   res.send({
     _id: user._id,
-    name: user.name,
+    userName: user.Username,
     email: user.email,
     isAdmin: user.isAdmin,
   });

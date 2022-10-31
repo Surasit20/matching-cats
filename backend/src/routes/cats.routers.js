@@ -5,8 +5,9 @@ const router = express.Router();
 //Add Cat
 //router.post('/add/cat', catController.register);
 
-//match
 router.post('/match', catController.match);
+router.post('/add', catController.addCat);
 router.get('/', catController.getCats);
 router.get('/:id', catController.getCat);
+router.get('/owner/:id', catController.getCatOwner);
 module.exports = router;

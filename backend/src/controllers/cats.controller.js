@@ -1,7 +1,7 @@
 const Cat = require('../models/cat.model.js');
 
 exports.addCat = async (req, res, next) => {
-  const newCat = new User({
+  const newCat = new Cat({
     name: req.body.name,
     owner: req.body.owner,
     breed: req.body.breed,
@@ -111,6 +111,14 @@ exports.getCat = async (req, res, next) => {
   //return cat of owner
   const idCat = req.params.id;
   const query = { _id: idCat };
+  const cats = await Cat.find(query);
+  res.send(cats);
+};
+
+exports.getCatOwner = async (req, res, next) => {
+  //return cat of owner
+  const idCat = req.params.id;
+  const query = { owner: idCat };
   const cats = await Cat.find(query);
   res.send(cats);
 };
