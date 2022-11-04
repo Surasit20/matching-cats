@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:dio/dio.dart';
-
 import '../../models/cast_model.dart';
 part 'cats_event.dart';
 part 'cats_state.dart';
@@ -13,6 +11,7 @@ class CatsBloc extends Bloc<CatsEvent, CatsState> {
   CatsBloc() : super(CatsInitial()) {
     on<OnAddCat>(_onAddCat);
     on<OnGetOwnerCat>(_onGetOwnerCat);
+    on<OnGetCat>(_onGetCat);
   }
 
   void _onAddCat(OnAddCat event, Emitter<CatsState> emit) async {
@@ -49,6 +48,21 @@ class CatsBloc extends Bloc<CatsEvent, CatsState> {
       //print(response.data);
 
       emit(GetOwnerCatSuccessState(cats: response.data));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _onGetCat(OnGetCat event, Emitter<CatsState> emit) async {
+    print("get cat all");
+    //emit(RegisterLoadingState());
+    try {
+      final response = await dio.get('http://192.168.1.4:4000/cats/');
+      //final json = jsonDecode(response.data.toString());
+      //final cats = json.map((e) => Cat.fromJson(e)).toList();
+      //List<Cat> output = (json.decode(response.data) as List).cast();
+      print(response.data);
+      emit(GetCatSuccessState(catsAll: response.data));
     } catch (e) {
       print(e);
     }

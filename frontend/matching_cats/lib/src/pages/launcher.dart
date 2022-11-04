@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'MainPage/UI/cats_match_page.dart';
 import 'MainPage/UI/home_page.dart';
 
 class LauncherPage extends StatefulWidget {
@@ -16,11 +17,9 @@ class _LauncherPageState extends State<LauncherPage> {
   int _selectedIndex = 0;
   final List<Widget> _pageWidget = <Widget>[
     const HomePage(
-      title: "home",
+      title: "My Cats",
     ),
-    const HomePage(
-      title: "home",
-    ),
+    const MatchPage(),
   ];
   final List<BottomNavigationBarItem> _menuBar = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
@@ -29,7 +28,7 @@ class _LauncherPageState extends State<LauncherPage> {
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.home),
-      label: 'Home',
+      label: 'Match',
     ),
   ];
 

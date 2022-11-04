@@ -102,13 +102,16 @@ exports.getCats = async (req, res, next) => {
 
 exports.getCats = async (req, res, next) => {
   //return cat of people
-  const query = { isMatching: false };
+  const query = { test: false };
+  //const cats = await Cat.find(query);
   const cats = await Cat.find(query);
+
   res.send(cats);
 };
 
 exports.getCat = async (req, res, next) => {
   //return cat of owner
+
   const idCat = req.params.id;
   const query = { _id: idCat };
   const cats = await Cat.find(query);

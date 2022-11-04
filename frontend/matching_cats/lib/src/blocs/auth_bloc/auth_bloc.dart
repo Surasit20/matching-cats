@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -8,6 +9,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   var dio = Dio();
   AuthBloc() : super(AuthInitial()) {
     on<AuthEvent>((event, emit) async {
+      
       if (event is OnRegister) {
         print("Register");
         //emit(RegisterLoadingState());

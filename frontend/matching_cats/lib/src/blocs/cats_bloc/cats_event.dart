@@ -27,3 +27,5 @@ class OnAddCat extends CatsEvent {
 }
 
 class OnGetOwnerCat extends CatsEvent {}
+
+class OnGetCat extends CatsEvent {}

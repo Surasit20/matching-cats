@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                   '/add/cat',
                 );
               },
-              child: Text('Add Cat Button'),
+              child: Text('Add Cat Button1'),
             ),
             _popUpSelectCat()
           ],
