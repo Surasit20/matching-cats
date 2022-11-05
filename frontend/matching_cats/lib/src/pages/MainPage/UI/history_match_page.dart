@@ -4,20 +4,20 @@ import 'package:matching_cats/src/blocs/cats_bloc/cats_bloc.dart';
 import 'package:matching_cats/src/blocs/dash_board_bloc/dash_board_bloc.dart';
 import 'package:matching_cats/src/models/cast_model.dart';
 
-class MatchPage extends StatefulWidget {
-  const MatchPage({
+class HistoryMatchPage extends StatefulWidget {
+  const HistoryMatchPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<MatchPage> createState() => _MatchPageState();
+  State<HistoryMatchPage> createState() => _HistoryMatchPageState();
 }
 
-class _MatchPageState extends State<MatchPage> {
+class _HistoryMatchPageState extends State<HistoryMatchPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<CatsBloc>(context).add(OnGetCats());
+    BlocProvider.of<CatsBloc>(context).add(OnGetOwnerCat());
   }
 
   @override
@@ -27,9 +27,9 @@ class _MatchPageState extends State<MatchPage> {
       body: BlocConsumer<CatsBloc, CatsState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (state is GetCatsSuccessState) {
+          if (state is GetOwnerCatSuccessState) {
             //print(state.catsAll);
-            return buildListView(context, state.catsAll);
+            return buildListView(context, state.cats);
           } else {
             return Container();
           }
@@ -43,9 +43,9 @@ class _MatchPageState extends State<MatchPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "Match",
-              style: const TextStyle(fontSize: 50.00),
+            const Text(
+              "History",
+              style: TextStyle(fontSize: 50.00),
             ),
             // ปุ่มแอดแมว
             TextButton(
@@ -83,11 +83,11 @@ class _MatchPageState extends State<MatchPage> {
               ),
               itemBuilder: (context) {
                 return [
-                  PopupMenuItem(
+                  const PopupMenuItem(
                     value: 'Accept',
                     child: Text('Accept'),
                   ),
-                  PopupMenuItem(
+                  const PopupMenuItem(
                     value: 'Cancel',
                     child: Text('Cancel'),
                   )
@@ -97,6 +97,10 @@ class _MatchPageState extends State<MatchPage> {
                 print('You Click on po up menu item $value $id ');
               },
             ),
+            onTap: () => {
+              Navigator.of(context)
+                  .pushNamed('/accept/match', arguments: {"id": id})
+            },
             // </Add>
           );
         },

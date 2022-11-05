@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matching_cats/src/pages/MainPage/UI/history_match_page.dart';
 import 'MainPage/UI/cats_match_page.dart';
 import 'MainPage/UI/home_page.dart';
 
@@ -20,6 +21,7 @@ class _LauncherPageState extends State<LauncherPage> {
       title: "My Cats",
     ),
     const MatchPage(),
+    const HistoryMatchPage()
   ];
   final List<BottomNavigationBarItem> _menuBar = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
@@ -29,6 +31,10 @@ class _LauncherPageState extends State<LauncherPage> {
     BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: 'Match',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'History',
     ),
   ];
 

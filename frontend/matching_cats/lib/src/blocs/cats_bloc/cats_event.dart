@@ -28,4 +28,12 @@ class OnAddCat extends CatsEvent {
 
 class OnGetOwnerCat extends CatsEvent {}
 
-class OnGetCat extends CatsEvent {}
+class OnGetCats extends CatsEvent {}
+
+class OnGetCat extends CatsEvent {
+  final String id;
+
+  OnGetCat({
+    required this.id,
+  });
+}

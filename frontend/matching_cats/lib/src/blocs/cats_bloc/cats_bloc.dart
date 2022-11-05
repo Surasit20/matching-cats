@@ -11,6 +11,7 @@ class CatsBloc extends Bloc<CatsEvent, CatsState> {
   CatsBloc() : super(CatsInitial()) {
     on<OnAddCat>(_onAddCat);
     on<OnGetOwnerCat>(_onGetOwnerCat);
+    on<OnGetCats>(_onGetCats);
     on<OnGetCat>(_onGetCat);
   }
 
@@ -53,16 +54,30 @@ class CatsBloc extends Bloc<CatsEvent, CatsState> {
     }
   }
 
-  Future<void> _onGetCat(OnGetCat event, Emitter<CatsState> emit) async {
+  Future<void> _onGetCats(OnGetCats event, Emitter<CatsState> emit) async {
     print("get cat all");
     //emit(RegisterLoadingState());
     try {
       final response = await dio.get('http://192.168.1.4:4000/cats/');
       //final json = jsonDecode(response.data.toString());
       //final cats = json.map((e) => Cat.fromJson(e)).toList();
-      //List<Cat> output = (json.decode(response.data) as List).cast();
-      print(response.data);
-      emit(GetCatSuccessState(catsAll: response.data));
+      //List<Cat> output = (json.decode(response.data) as List).cast()
+      emit(GetCatsSuccessState(catsAll: response.data));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _onGetCat(OnGetCat event, Emitter<CatsState> emit) async {
+    print("get cat");
+    //emit(RegisterLoadingState());
+    final id = event.id;
+    try {
+      final response = await dio.get('http://192.168.1.4:4000/cats/$id');
+      //final json = jsonDecode(response.data.toString());
+      //final cats = json.map((e) => Cat.fromJson(e)).toList();
+      //List<Cat> output = (json.decode(response.data) as List).cast()
+      emit(GetCatSuccessState(cat: response.data));
     } catch (e) {
       print(e);
     }

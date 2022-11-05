@@ -4,6 +4,7 @@ import 'package:matching_cats/src/blocs/cats_bloc/cats_bloc.dart';
 import 'package:matching_cats/src/blocs/dash_board_bloc/dash_board_bloc.dart';
 import 'package:matching_cats/src/pages/AuthPage/UI/register_page.dart';
 import 'package:matching_cats/src/pages/CatsPage/UI/add_cat_page.dart';
+import 'package:matching_cats/src/pages/MainPage/UI/accept_match_page.dart';
 import 'package:matching_cats/src/pages/MainPage/UI/home_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:matching_cats/src/pages/launcher.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
                 title: 'add_cat_page',
               ),
           "/launcher": (context) => const LauncherPage(),
+          "/accept/match": (context) => const AcceptMatchPage(
+                id: "",
+              ),
         },
       ),
     );

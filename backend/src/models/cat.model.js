@@ -16,6 +16,8 @@ const catSchema = new mongoose.Schema(
     isMatching: { type: String, required: false },
     congenitalDisease: { type: String, required: true },
     natureOfParenting: { type: String, required: true },
+    pending: { type: Array, required: false },
+    accept: { type: String, required: false },
     //location: { type: String, required: true },
   },
   {

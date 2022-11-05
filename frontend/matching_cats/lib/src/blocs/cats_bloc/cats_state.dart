@@ -10,7 +10,12 @@ class GetOwnerCatSuccessState extends CatsState {
   GetOwnerCatSuccessState({required this.cats});
 }
 
-class GetCatSuccessState extends CatsState {
+class GetCatsSuccessState extends CatsState {
   dynamic catsAll;
-  GetCatSuccessState({required this.catsAll});
+  GetCatsSuccessState({required this.catsAll});
+}
+
+class GetCatSuccessState extends CatsState {
+  dynamic cat;
+  GetCatSuccessState({required this.cat});
 }

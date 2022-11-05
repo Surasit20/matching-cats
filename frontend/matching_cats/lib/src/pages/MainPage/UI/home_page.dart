@@ -104,47 +104,4 @@ class _HomePageState extends State<HomePage> {
           return Container();
         }
       });
-
-  Widget PopupList(dynamic catsList) => (PopupMenuButton(
-        itemBuilder: (context) {
-          print(catsList);
-          var list = <PopupMenuEntry<Object>>[];
-          print(catsList);
-          list.add(
-            CheckedPopupMenuItem(
-              child: Text(
-                "English",
-                style: TextStyle(color: Colors.black),
-              ),
-              value: 1,
-              // checked: true,
-            ),
-          );
-
-          list.add(
-            CheckedPopupMenuItem(
-              child: Text(
-                "English",
-                style: TextStyle(color: Colors.black),
-              ),
-              value: 2,
-              //checked: true,
-            ),
-          );
-
-          return list;
-        },
-        initialValue: 2,
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
-        onSelected: (value) {
-          print("value:$value");
-        },
-        icon: const Icon(
-          Icons.add,
-          size: 50,
-          color: Colors.blue,
-        ),
-      ));
 }
