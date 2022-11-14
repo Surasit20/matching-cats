@@ -19,6 +19,8 @@ class _AddCatPageState extends State<AddCatPage> {
       _vaccineInput = "",
       _congenitalDiseaseInput = "",
       _natureOfParentingInput = "";
+
+  //////////////////////////////////////////////////////////
   @override
   void initState() {
     super.initState();
@@ -156,6 +158,19 @@ class _AddCatPageState extends State<AddCatPage> {
                 border: UnderlineInputBorder(),
                 labelText: 'Enter your  natureOfParenting',
               ),
+            ),
+          ),
+          //upload image cat 1
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+              ),
+              onPressed: () {
+                BlocProvider.of<CatsBloc>(context).add(OnUploadImageCat());
+              },
+              child: Text('TextButton'),
             ),
           ),
 

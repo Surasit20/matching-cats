@@ -18,7 +18,9 @@ const catSchema = new mongoose.Schema(
     natureOfParenting: { type: String, required: true },
     pending: { type: Array, required: false },
     accept: { type: String, required: false },
-    //location: { type: String, required: true },
+    request: { type: Object, required: false },
+    location: { type: Object, required: false },
+    photo: { type: Array, required: false },
   },
   {
     timestamps: true,

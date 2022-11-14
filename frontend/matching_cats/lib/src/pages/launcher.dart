@@ -25,7 +25,8 @@ class _LauncherPageState extends State<LauncherPage> {
   ];
   final List<BottomNavigationBarItem> _menuBar = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: Icon(Icons.home),
+      icon: Image.network(
+          "https://cdn.pixabay.com/photo/2019/10/16/09/09/doraemon-4553920_960_720.png"),
       label: 'Home',
     ),
     BottomNavigationBarItem(

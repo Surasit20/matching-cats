@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:matching_cats/src/blocs/cats_bloc/cats_bloc.dart';
 import 'package:matching_cats/src/blocs/dash_board_bloc/dash_board_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -69,30 +70,45 @@ class _HomePageState extends State<HomePage> {
         if (state is GetOwnerCatSuccessState) {
           //PopupList(state.cats);
           final cats = state.cats;
+          print(cats);
           return PopupMenuButton(
             itemBuilder: (context) {
               var list = <PopupMenuEntry<Object>>[];
+
               for (var cat in cats) {
                 final index = cats.indexOf(cat);
-
-                list.add(
-                  CheckedPopupMenuItem(
-                    child: Text(
-                      cat["name"].toString(),
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    value: index,
-                    // checked: true,
-                  ),
-                );
+                (cat["request"] == "")
+                    ? list.add(
+                        CheckedPopupMenuItem(
+                          child: Text(
+                            cat["name"].toString(),
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          value: cat["_id"].toString(),
+                          // checked: true,
+                        ),
+                      )
+                    : list.add(
+                        CheckedPopupMenuItem(
+                          child: Text(
+                            "${cat["name"].toString()} กำลังรอยัน",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          value: cat["_id"].toString(),
+                          // checked: true,
+                        ),
+                      );
               }
               return list;
             },
             onCanceled: () {
               print("You have canceled the menu.");
             },
-            onSelected: (value) {
+            onSelected: (value) async {
               print("value:$value");
+              //set selected cat
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setString('catID', value.toString());
             },
             icon: const Icon(
               Icons.add,

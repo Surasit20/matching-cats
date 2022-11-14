@@ -33,3 +33,7 @@ exports.login = async (req, res, next) => {
   }
   res.status(401).send({ message: 'Invlid email or password' });
 };
+
+exports.test = async (req, res, next) => {
+  res.status(200).send({ message: 'Invlid email or password' });
+};

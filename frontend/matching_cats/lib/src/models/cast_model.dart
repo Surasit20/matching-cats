@@ -11,21 +11,22 @@ class Cat {
   String isMatching;
   String congenitalDisease;
   String natureOfParenting;
+  final request;
 
-  Cat({
-    required this.id,
-    required this.name,
-    required this.owner,
-    required this.breed,
-    required this.color,
-    required this.sex,
-    required this.age,
-    required this.vaccine,
-    required this.matching,
-    required this.isMatching,
-    required this.congenitalDisease,
-    required this.natureOfParenting,
-  });
+  Cat(
+      {required this.id,
+      required this.name,
+      required this.owner,
+      required this.breed,
+      required this.color,
+      required this.sex,
+      required this.age,
+      required this.vaccine,
+      required this.matching,
+      required this.isMatching,
+      required this.congenitalDisease,
+      required this.natureOfParenting,
+      required this.request});
 
   factory Cat.fromJson(Map<String, dynamic> json) => Cat(
         id: json[""],
@@ -40,5 +41,6 @@ class Cat {
         isMatching: json[""],
         congenitalDisease: json[""],
         natureOfParenting: json[""],
+        request: json[""],
       );
 }

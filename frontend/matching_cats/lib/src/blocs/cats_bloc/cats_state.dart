@@ -19,3 +19,5 @@ class GetCatSuccessState extends CatsState {
   dynamic cat;
   GetCatSuccessState({required this.cat});
 }
+
+class UploadImageCatSuccessState extends CatsState {}

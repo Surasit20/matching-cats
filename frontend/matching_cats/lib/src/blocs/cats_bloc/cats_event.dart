@@ -30,6 +30,8 @@ class OnGetOwnerCat extends CatsEvent {}
 
 class OnGetCats extends CatsEvent {}
 
+class OnUploadImageCat extends CatsEvent {}
+
 class OnGetCat extends CatsEvent {
   final String id;
 

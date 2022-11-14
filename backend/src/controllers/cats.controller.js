@@ -1,5 +1,5 @@
 const Cat = require('../models/cat.model.js');
-
+const fs = require('fs');
 exports.addCat = async (req, res, next) => {
   const newCat = new Cat({
     name: req.body.name,
@@ -40,31 +40,29 @@ exports.deleteCat = async (req, res, next) => {
 
 exports.match = async (req, res, next) => {
   const { catOwnerId, catTargetId } = req.body;
-  const isMatch = checkMatch(catOwnerId, catTargetId);
-  if (!isMatch) {
+  //const isMatch = checkMatch(catOwnerId, catTargetId);
+  if (true) {
     //fine id cat target
     Cat.findById(catTargetId)
       .then((doc) => {
-        console.log(doc.matching);
-        const newMatch = [...doc.matching, catOwnerId];
+        console.log(doc.pending);
+        const newMatch = [...doc.pending, catOwnerId];
         console.log(newMatch);
 
         //update new match
 
-        /*
-      Cat.findByIdAndUpdate(
-        catTargetId,
-        { matching: newMatch },
-        (err, docs) => {
-          if (err) {
-            console.log(err);
-          } else {
-            //console.log('Updated Match : ', docs);
-            console.log('Updated Match : ');
+        Cat.findByIdAndUpdate(
+          catTargetId,
+          { pending: newMatch },
+          (err, docs) => {
+            if (err) {
+              console.log(err);
+            } else {
+              //console.log('Updated Match : ', docs);
+              console.log('Updated Match : ');
+            }
           }
-        }
-      );
-      */
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -124,4 +122,33 @@ exports.getCatOwner = async (req, res, next) => {
   const query = { owner: idCat };
   const cats = await Cat.find(query);
   res.send(cats);
+};
+
+exports.uploadImageCat = (req, res, next) => {
+  if (req.file === 'undefined' || req.file === null) {
+    return res.status(422).send('image is empty');
+  }
+  let file = req.file;
+
+  return res.status(201).send({ name: file.filename });
+};
+
+exports.test = (req, res, next) => {
+  var contentType = 'image/png';
+  // Parsing the URL
+  var request = url.parse(req.url, true);
+
+  // Extracting the path of file
+  var action = request.pathname;
+
+  // Path Refinements
+  var filePath = path.join(__dirname, action).split('%20').join(' ');
+  res.writeHead(200, {
+    'Content-Type': contentType,
+  });
+  fs.readFile(filePath, function (err, content) {
+    // Serving the image
+    console.log(content);
+    res.end(content);
+  });
 };
